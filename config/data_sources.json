@@ -1,0 +1,97 @@
+{
+  "sources": [
+    {
+      "id": "brent_spot",
+      "kind": "fred",
+      "series": "DCOILBRENTEU",
+      "units": "USD per barrel, spot FOB",
+      "frequency": "daily",
+      "timing": "Observation date only. Intraday observation/availability time unknown; not an Indian overnight return.",
+      "primary_source": "https://www.eia.gov/dnav/pet/hist/RBRTEd.htm",
+      "limitations": "EIA spot series distributed through FRED; not Brent futures and not a historical publication-vintage dataset.",
+      "snapshot_fallback": {
+        "kind": "datahub",
+        "repository": "datasets/oil-prices",
+        "revision": "b227368d527661a662bf14440f94d14b60ef9361",
+        "resource": "brent-daily",
+        "date_column": "Date",
+        "value_column": "Price"
+      }
+    },
+    {
+      "id": "us_vix",
+      "kind": "fred",
+      "series": "VIXCLS",
+      "units": "VIX index points",
+      "frequency": "daily",
+      "timing": "US-session daily closing index level distributed by FRED; observation date is not a publication timestamp.",
+      "primary_source": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+      "limitations": "Daily closing level, not intraday OHLC. Originating CBOE usage restrictions apply.",
+      "snapshot_fallback": {
+        "kind": "datahub",
+        "repository": "datasets/finance-vix",
+        "revision": "3dbea23c70cc2afbeeec8ac232c9ec72ac26ac21",
+        "resource": "vix-daily",
+        "date_column": "DATE",
+        "value_column": "CLOSE",
+        "ohlc_columns": {"open": "OPEN", "high": "HIGH", "low": "LOW", "close": "CLOSE"}
+      }
+    },
+    {
+      "id": "usd_inr",
+      "kind": "fred",
+      "series": "DEXINUS",
+      "units": "INR per USD",
+      "frequency": "daily",
+      "timing": "FRED documents noon buying rates in New York City. This is an observation convention, not a verified historical publication timestamp.",
+      "limitations": "US noon is after the Indian cash-market close. Must not be treated as an Indian same-day closing quote."
+    },
+    {
+      "id": "us_yield_10y",
+      "kind": "fred",
+      "series": "DGS10",
+      "units": "percent per annum",
+      "frequency": "daily",
+      "timing": "US Treasury constant-maturity yield; FRED date alone does not establish intraday availability.",
+      "limitations": "Use changes in basis points, not percentage returns on yields."
+    },
+    {
+      "id": "nifty50",
+      "kind": "yahoo_daily",
+      "symbol": "^NSEI",
+      "timezone": "Asia/Kolkata",
+      "units": "price index points",
+      "frequency": "daily",
+      "timing": "Daily bar timestamps are labels, not verified publication timestamps. Check exchange hours and exceptional sessions.",
+      "limitations": "Third-party price index, not total return. Cross-check against NSE before analysis."
+    },
+    {
+      "id": "sp500",
+      "kind": "yahoo_daily",
+      "symbol": "^GSPC",
+      "timezone": "America/New_York",
+      "units": "price index points",
+      "frequency": "daily",
+      "timing": "US-session daily bar; align completed sessions to subsequent Indian sessions after verifying availability.",
+      "limitations": "Third-party price index, not total return. Provider access is not guaranteed."
+    },
+    {
+      "id": "india_yield_10y",
+      "kind": "unresolved",
+      "units": "percent per annum",
+      "frequency": "daily",
+      "timing": "Needs documented observation time and a consistent 10-year benchmark.",
+      "candidate_sources": ["https://dbie.rbi.org.in/", "https://www.ccilindia.com/", "https://www.fbil.org.in/"],
+      "limitations": "A verified daily download endpoint is not established. Monthly long-term yields must not replace this daily series."
+    }
+  ],
+  "intraday_probe": {
+    "id": "brent_futures_intraday_pilot",
+    "kind": "yahoo_intraday",
+    "symbol": "BZ=F",
+    "units": "USD per barrel, NYMEX Brent financial futures",
+    "frequency": "30-minute",
+    "timing": "Provider bar-start timestamps; a bar close is not its start-time price. Do not construct overnight returns until boundary conventions are verified.",
+    "limitations": "Yahoo identifies NY Mercantile Brent Crude Oil Last Day Financial Futures, not ICE futures. Optional recent-history pilot only; no claim of ten-year intraday availability or verified contract-roll rules."
+  }
+}

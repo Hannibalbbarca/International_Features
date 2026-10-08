@@ -1,0 +1,3 @@
+# Windows does not normally ship the IANA time-zone database used by zoneinfo.
+# Linux/macOS can use their system database without this Python dependency.
+tzdata; sys_platform == "win32"
