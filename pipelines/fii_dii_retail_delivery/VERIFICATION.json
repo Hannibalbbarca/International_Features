@@ -1,0 +1,41 @@
+{
+  "verified_utc": "2026-11-06T05:47:54.635293+00:00",
+  "unit_tests_passed": 19,
+  "actual_source_dates_processed": [
+    "2016-11-07",
+    "2024-07-05",
+    "2024-07-08",
+    "2026-11-05"
+  ],
+  "offline_regression_network_requests": 0,
+  "sample_scope": "all_reported_CM_instruments",
+  "sample_2026_11_05": {
+    "day": "2026-11-05",
+    "scope": "all_reported_CM_instruments",
+    "x_vwap_lower_crore": 89568.096230558,
+    "x_vwap_upper_crore": 90331.35490623601,
+    "x_close_lower_crore": 89638.158370368,
+    "x_close_upper_crore": 90403.417892705,
+    "institutional_buy_crore": 53966.14,
+    "institutional_sell_crore": 49436.0,
+    "rest_buy_lower_crore": 35601.956230558004,
+    "rest_buy_upper_crore": 36365.21490623601,
+    "rest_sell_lower_crore": 40132.096230558,
+    "rest_sell_upper_crore": 40895.35490623601,
+    "rest_net_crore": -4530.139999999999,
+    "missing_exchanges": "",
+    "institutional_source": "https://www.nseindia.com/api/fiidiiTradeReact",
+    "comparability": "UNVERIFIED: model outputs, not observed retail categories",
+    "data_status": "bounded_delivery_estimate",
+    "total_turnover_crore": 186070.96198110902,
+    "institutional_participation_crore": 51701.07,
+    "rest_participation_lower_crore": 37867.026230558,
+    "rest_participation_upper_crore": 38630.28490623601,
+    "close_minus_vwap_lower_crore": 70.06213980999019
+  },
+  "limitations": [
+    "Historical institutional data requires a separately verified gross-buy/gross-sell CSV.",
+    "Missing MSEI delivery quantity is bounded using turnover, not invented.",
+    "All remaining-participant values are conditional estimates with unverified scope comparability."
+  ]
+}

@@ -1,5 +1,41 @@
 # International_Features
 
+## FII/DII and retail delivery analysis — this branch
+
+Branch: **`codex/fii-dii-retail-delivery-pipeline`**
+
+This branch adds a local Python pipeline for ten-year historical acquisition and
+ongoing collection of NSE, BSE and MSEI reports. It estimates delivery value from
+each security's turnover and delivery quantity, captures available FII/DII gross
+buys and sells, and calculates a conditional remaining-participant bucket for
+the retail-participation research.
+
+**The remaining bucket includes everyone outside reported FII/DII. It does not
+isolate retail.** Delivery money is an estimate; historical institutional inputs,
+MSEI delivery quantities and instrument-scope comparability have explicit gaps.
+No complete ten-year institutional or delivery-money series is claimed.
+
+- [Pipeline instructions, sources and methodology](pipelines/fii_dii_retail_delivery/README.md)
+- [What every file does](FILES.md)
+- [Validation results](pipelines/fii_dii_retail_delivery/VERIFICATION.json)
+- [Small frozen CSV examples](pipelines/fii_dii_retail_delivery/examples/)
+
+```sh
+git switch codex/fii-dii-retail-delivery-pipeline
+cd pipelines/fii_dii_retail_delivery
+python marketpipe.py backfill --years 10
+python marketpipe.py update --lookback 10 --refresh
+python marketpipe.py status
+```
+
+Use `python3` or `py -3` if that is your Python 3 command. This pipeline requires
+Python 3.10+ and no additional packages or AI calls. Windows launchers and an
+optional local daily scheduler are included. Pushing this branch does not install
+or run that scheduler. Downloads, local databases and logs remain ignored by Git;
+the examples are frozen validation samples.
+
+## Existing international-features research
+
 Research on Nifty 50's relationship with exchange rates, Brent oil, government
 bond yields, and global markets.
 
